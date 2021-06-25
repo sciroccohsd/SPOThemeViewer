@@ -1,0 +1,23 @@
+@import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
+
+.spfxThemeViewer {
+ .boxWrapper {
+    display: inline-block;
+    padding: 5px;
+    margin: 10px;
+    text-align: center;
+    position: relative;
+
+    div {
+      margin: 3px auto;
+    }
+    .box {
+      border: 1px solid black;
+      padding: 0;
+      width: 100px;
+      height: 100px;
+      line-height: 100px;
+      cursor: pointer;
+    }
+  }
+}
