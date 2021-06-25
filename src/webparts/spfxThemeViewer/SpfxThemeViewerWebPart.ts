@@ -25,32 +25,39 @@ export default class SpfxThemeViewerWebPart extends BaseClientSideWebPart<ISpfxT
 
     public render(): void {
         const root = this.CreateElement("div", { "class": styles.spfxThemeViewer }),
-            msg = this.CreateElement("div", { "text": "From: window.__themeState__.theme" });
+            warning = this.CreateElement("div", { "class": styles.warning, "text": "NOTE: Not all theme names are available to every SPO theme set." }),
+            msg = this.CreateElement("div", { "text": "Theme values from: window.__themeState__.theme" }),
+            link = this.CreateElement("a", {
+                "class": styles.link,
+                "href": "https://docs.microsoft.com/en-us/sharepoint/dev/design/design-guidance-overview",
+                "target": "_blank",
+                "text": "Designing great SharePoint experiences - Overview (MS Docs)"
+            }),
+            moreInfo = this.CreateElement("div", { "text": 'Example: background-color: "[theme: bodyBackground, default:#ffffff]";' }),
+            names = Object.keys(window.__themeState__.theme);
 
-        for (const name in window.__themeState__.theme) {
-            if (Object.prototype.hasOwnProperty.call(window.__themeState__.theme, name)) {
-                const color = window.__themeState__.theme[name];
-                root.append(this.CreateThemeBox(name, color));
-            }
-        }
+        names.sort().forEach(name => {
+            const value = window.__themeState__.theme[name];
+            root.append(this.CreateThemeBox(name, value));
+        });
 
-        this.domElement.append(msg, root);
+        this.domElement.append(warning, msg, link, moreInfo, root);
     }
 
-    private CreateThemeBox(name: string, color: string): HTMLDivElement {
+    private CreateThemeBox(name: string, value: string): HTMLDivElement {
         const wrapper = this.CreateElement("div", { "class": styles.boxWrapper }),
-            label = this.CreateElement("div", { "text": name, "title": color }),
+            label = this.CreateElement("div", { "text": name }),
             colorbox = this.CreateElement("div", {
-                "style": `background-color: ${ color }`,
-                "title": `Click to display value in the console.\n${ name }: ${ color }`,
-                "class": styles.box,
-                "onclick": evt => {
-                    console.info(name, color);
-                }
+                "style": `background-color: ${ value }`,
+                "class": styles.box
+            }),
+            display = this.CreateElement("div", {
+                "class": `themeviewer-display ${ styles.display }`,
+                "text": `${ name } : ${ value }`
             });
 
         
-        wrapper.append(label, colorbox);
+        wrapper.append(label, colorbox, display);
         return wrapper;
     }
 

@@ -1,6 +1,31 @@
 @import '~@microsoft/sp-office-ui-fabric-core/dist/sass/SPFabricCore.scss';
 
+.warning {
+  background-color: "[theme:warningBackground]";
+  border: 1px solid "[theme:warningHighlight]";
+  color: "[theme:warningText]";
+  font-size: "[theme:xLargeFontSize]";
+  font-style: italic;
+  font-weight: "[theme:xLargeFontWeight]";
+  margin: 10px auto;
+  padding: 5px 10px;
+  text-align: center;
+}
+
+.link {
+  color: "[theme:link]";
+  display: block;
+  text-decoration: none;
+
+  &:hover {
+    color: "[theme:linkHovered]";
+    text-decoration: underline;
+  }
+}
 .spfxThemeViewer {
+  text-align: center;
+
+
  .boxWrapper {
     display: inline-block;
     padding: 5px;
@@ -14,10 +39,29 @@
     .box {
       border: 1px solid black;
       padding: 0;
-      width: 100px;
+      width: 200px;
       height: 100px;
       line-height: 100px;
-      cursor: pointer;
     }
+    .display {
+      background-color: "[theme:neutralLight]";
+      border: 1px solid "[theme:neutralDark]";
+      bottom: 0;
+      box-shadow: "[theme:elevation16]";
+      color: "[theme:neutralDark]";
+      // display: none;
+      font-size: "[theme:smallPlusFontSize]";
+      font-style: italic;
+      left: 0;
+      margin: 0;
+      right: 0;
+      padding: 3px 5px;
+      position: absolute;
+      text-align: center;
+      z-index: 10;
+    }
+    // &:hover .display {
+    //   display: block;
+    // }
   }
 }
