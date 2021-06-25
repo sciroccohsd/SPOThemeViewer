@@ -27,13 +27,19 @@ export default class SpfxThemeViewerWebPart extends BaseClientSideWebPart<ISpfxT
         const root = this.CreateElement("div", { "class": styles.spfxThemeViewer }),
             warning = this.CreateElement("div", { "class": styles.warning, "text": "NOTE: Not all theme names are available to every SPO theme set." }),
             msg = this.CreateElement("div", { "text": "Theme values from: window.__themeState__.theme" }),
-            link = this.CreateElement("a", {
+            link1 = this.CreateElement("a", {
                 "class": styles.link,
                 "href": "https://docs.microsoft.com/en-us/sharepoint/dev/design/design-guidance-overview",
                 "target": "_blank",
                 "text": "Designing great SharePoint experiences - Overview (MS Docs)"
             }),
-            moreInfo = this.CreateElement("div", { "text": 'Example: background-color: "[theme: bodyBackground, default:#ffffff]";' }),
+            link2 = this.CreateElement("a", {
+                "class": styles.link,
+                "href": "https://docs.microsoft.com/en-us/sharepoint/dev/design/themes-colors",
+                "target": "_blank",
+                "text": "SharePoint themes and colors (MS Docs)"
+            }),
+            moreInfo = this.CreateElement("div", { "text": 'Example: { background-color: "[theme: bodyBackground, default:#ffffff]"; }' }),
             names = Object.keys(window.__themeState__.theme);
 
         names.sort().forEach(name => {
@@ -41,7 +47,7 @@ export default class SpfxThemeViewerWebPart extends BaseClientSideWebPart<ISpfxT
             root.append(this.CreateThemeBox(name, value));
         });
 
-        this.domElement.append(warning, msg, link, moreInfo, root);
+        this.domElement.append(warning, msg, link1, link2, moreInfo, root);
     }
 
     private CreateThemeBox(name: string, value: string): HTMLDivElement {
