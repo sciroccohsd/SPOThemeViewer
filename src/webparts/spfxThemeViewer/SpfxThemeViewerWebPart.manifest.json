@@ -19,7 +19,7 @@
     "group": { "default": "Other" },
     "title": { "default": "SPFX Theme Viewer" },
     "description": { "default": "Displays the SP theme names and colors" },
-    "officeFabricIconFontName": "Page",
+    "officeFabricIconFontName": "Color",
     "properties": {
       "description": "SPFX Theme Viewer"
     }
